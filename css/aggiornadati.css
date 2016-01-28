@@ -1,0 +1,43 @@
+.main {
+    padding: 20px 0;
+    min-height: 250px;
+	width:700px;
+	height:300px;
+	display: inline-block;
+    vertical-align: middle;
+    float: none;
+	margin: auto;
+    width: 60%;
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -400px;
+}
+.main .btn {
+    border:0;
+    border-radius: 0;
+    background: #428bca;
+    color: #ffffff;
+}
+.main .btn:hover,
+.main .btn:focus {
+    background: #2a6496;
+    color: #ffffff;
+}
+.main .dropdown-menu  {
+    background-color: #428bca;
+    border:0;
+    padding: 0;
+    border-radius: 0;
+}
+.main .dropdown-menu a  {
+    color: #ffffff;
+    padding: 5%;
+}
+.main .dropdown-menu a:hover,
+.main .dropdown-menu a:focus  {
+    color: #ffffff;
+    background: #2a6496;
+}
