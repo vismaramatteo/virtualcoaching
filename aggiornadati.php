@@ -71,7 +71,7 @@ if(!isset($_SESSION['login_user']))
 			<a>
         			<?php 
                         if($_SESSION['login_user'])
-						echo ''.$_SESSION['login_user'].''
+			echo ''.$_SESSION['login_user'].''
                                  
                     ?>
            </a> 
