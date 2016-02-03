@@ -34,9 +34,8 @@ session_start();
 		$result=mysql_query($query);
 	}
 		
-
-	
-	echo $result;
+	$row=mysql_fetch_array($query);
+    echo $row['IDSportCategoria'];
 	
 	mysql_close($connection);
 
