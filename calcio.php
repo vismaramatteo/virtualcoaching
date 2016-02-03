@@ -193,23 +193,22 @@ if(!isset($_SESSION['login_user']))
 				<div class="row setup-content step activeStepInfo" id="step-1">
 					<div class="col-xs-12">
 						<div>
-						<div class="col-md-12 well text-center">
-							<h1>Categoria</h1>
-							<center>
-								<form method="GET" action="../php/categoriecalcio.php">
-									<select name="eta" style="height:30px; width:250px">
-										<option value="pulcini">U 11 - PULCINI</option>
-										<option value="esordienti">U 13 - ESORDIENTI</option>
-										<option value="giovanissimi">U 15 - GIOVANISSIMI</option>
-										<option value="allievi">U 17 - ALLIEVI</option>
-										<option value="juniores">U 20 - JUNIORES</option>
-									</select>
-								</form>
-								<br>						
-								
-							</center>
-							<button class="btn-cat" onclick="javascript: resetActive(event, 66, 'step-2')" style="float:right">Avanti</button>
-						</div>
+                          <div class="col-md-12 well text-center">
+                              <h1>Categoria</h1>
+                                  <form method="GET" action="../php/categoriecalcio.php">
+                                      <center>						
+                                          <select name="eta" style="height:30px; width:250px">
+                                              <option value="pulcini">U 11 - PULCINI</option>
+                                              <option value="esordienti">U 13 - ESORDIENTI</option>
+                                              <option value="giovanissimi">U 15 - GIOVANISSIMI</option>
+                                              <option value="allievi">U 17 - ALLIEVI</option>
+                                              <option value="juniores">U 20 - JUNIORES</option>
+                                          </select>
+                                          <br>	
+                                      </center>
+                                      <button class="btn-cat" onclick="javascript: resetActive(event, 66, 'step-2')" style="float:right">Avanti</button>
+                                  </form>
+                          </div>
 						</div>
 					</div>
 				</div>
