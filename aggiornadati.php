@@ -71,7 +71,15 @@ if(!isset($_SESSION['login_user']))
 			<a>
         			<?php 
                         if($_SESSION['login_user'])
-			echo ''.$_SESSION['login_user'].''
+                        session_start();
+                        $connection=mysql_connect("localhost","virtualcoaching","");
+                        mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                        $email=$_SESSION['login_user'];
+                        $query="SELECT Name,Surname FROM user WHERE Email='$email'"; 
+                        $result=mysql_query($query);
+                        $r=mysql_fetch_array($result);
+                        echo ''.$r['Name'].' '.$r['Surname'];
+                        mysql_close($connection);
                                  
                     ?>
            </a> 
@@ -116,10 +124,36 @@ if(!isset($_SESSION['login_user']))
                           ?>
                         </h3>
                         
-						<h5>E-mail: <input type="text" name="email" value="<?php echo $_SESSION['login_user'];  ?> "/></h5>
+						<h5>Nome: <input type="text" name="nome" value="<?php 
+                           session_start();
+                          	$connection=mysql_connect("localhost","virtualcoaching","");
+                            mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                            $email=$_SESSION['login_user']; 
+                            $query="SELECT Name FROM user WHERE Email='$email'"; 
+                            $result=mysql_query($query);
+                            $r=mysql_fetch_array($result);
+                            echo ''.$r['Name'];
+                           
+                            mysql_close($connection);
+                          ?>"/></h5>                       
+                        
+                        <h5>Cognome: <input type="text" name="cognome" value="<?php 
+                           session_start();
+                          	$connection=mysql_connect("localhost","virtualcoaching","");
+                            mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                            $email=$_SESSION['login_user']; 
+                            $query="SELECT Surname FROM user WHERE Email='$email'"; 
+                            $result=mysql_query($query);
+                            $r=mysql_fetch_array($result);
+                            echo ''.$r['Surname'];
+                           
+                            mysql_close($connection);
+                          ?>"/></h5> 
+                        
+						<h5>E-mail: <input type="text" name="email" value="<?php $email=$_SESSION['login_user']; echo $email;   ?>"/></h5>
                        
                         
-						<h5>Password: <input type="password" name="password" value=" <?php 
+						<h5>Password: <input type="password" name="password" value="<?php 
                            session_start();
                           	$connection=mysql_connect("localhost","virtualcoaching","");
                             mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
@@ -130,7 +164,7 @@ if(!isset($_SESSION['login_user']))
                             echo ''.$r['Password'];
                            
                             mysql_close($connection);
-                          ?> "/>
+                          ?>"/>
                         </h5>
                         
                         <!--
@@ -149,9 +183,11 @@ if(!isset($_SESSION['login_user']))
 					
 
 					<div class="col-lg-3">	
-							<button class="btn" style="margin-right:20px"><a href="#" style="color:white"><i class="glyphicon glyphicon-trash"></i> Cancella Account</a></button>
-							<br><br>
-                            <button class="btn" type="submit" style="margin-right:20px;background-color:#b60000"><a href="#" style="color:white"><i class="glyphicon glyphicon-wrench" ></i> Modifica Dati</a></button>
+                    
+							<button class="btn" type="submit" style="margin-right:20px" name="b1"><i class="glyphicon glyphicon-trash"></i> Cancella Account</button>
+						
+                            <br><br>
+                            <button class="btn" id="btn1" type="submit" style="margin-right:20px" name="b2"><i class="glyphicon glyphicon-wrench" ></i> Modifica Dati</button>
 
 					</div>
 				</div>
