@@ -404,6 +404,6 @@ if(!isset($_SESSION['login_user']))
 		</div>
 	</footer>
     
-</body>
+</body> 
 
 </html>
