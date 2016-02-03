@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['submit'])) {
+
     session_start();
     $connection = mysql_connect("localhost", "virtualcoaching", "");
     mysql_select_db("my_virtualcoaching",$connection);
@@ -7,13 +7,23 @@ if(isset($_POST['submit'])) {
     $email=$_SESSION["login_user"];
     $em=$_POST["email"];
     $pw=$_POST["password"];
+    $nome=$_POST["nome"];
+	$cognome=$_POST["cognome"];
+        
+    if(isset($_POST["b1"]))
+    {
+      $sql=mysql_query("DELETE FROM user WHERE Email = '$email'");     
+    }
+    else if(isset($_POST["b2"]))
+    {
+      $sql=mysql_query("UPDATE user SET Name = '$nome' , Surname = '$cognome' , Email = '$em', Password = '$pw' WHERE Email='$email'");
+    }
     
+    session_destroy();
+   	header("location: ../index.php");
+ 
     
-    $sql=mysql_query("UPDATE user SET Email = $em WHERE Email=$email");
-    $query=mysql_query("UPDATE user SET Password = $pw WHERE Email=$email");
-    
-    
-	$file=$_FILES['image']['tmp_name'];
+	/*$file=$_FILES['image']['tmp_name'];
     if(!isset($file))
     {
         echo 'Please select an Image';
@@ -29,7 +39,7 @@ if(isset($_POST['submit'])) {
 		$image = addslashes(file_get_contents($_FILES['image']['tmp_name'])); //SQL Injection defence!
 		$image_name = addslashes($_FILES['image']['name']);
 
-    $sql=mysql_query("ALTER TABLE `user` WHERE Email='$email' SET `img_utente`= '$image'") or DIE('query non riuscita'.mysql_error());
-	header("location: ../aggiornadati.php");
-}
+    $sql=mysql_query("ALTER TABLE `user` WHERE Email='$email' SET `img_utente`= '$image'") or DIE('query non riuscita'.mysql_error());*/
+
+
 ?>
