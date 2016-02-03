@@ -22,7 +22,7 @@
     session_destroy();
    	header("location: ../index.php");
  
-    
+     
 	/*$file=$_FILES['image']['tmp_name'];
     if(!isset($file))
     {
