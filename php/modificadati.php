@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    $connection = mysql_connect("localhost", "virtualcoaching", "");
+    $connection = mysql_connect("localhost", "root", "");
     mysql_select_db("my_virtualcoaching",$connection);
 
     $email=$_SESSION["login_user"];
