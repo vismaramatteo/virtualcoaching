@@ -10,7 +10,7 @@ $sport=$_POST['sport'];
 
 //STABILIRE CONNESSIONE CON IL SERVER
 
-$connection=mysql_connect("localhost","virtualcoaching", "");
+$connection=mysql_connect("localhost","root", "");
 mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
 
 //PROTEZIONE DATI
