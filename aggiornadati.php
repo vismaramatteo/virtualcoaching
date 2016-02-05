@@ -72,7 +72,7 @@ if(!isset($_SESSION['login_user']))
         			<?php 
                         if($_SESSION['login_user'])
                         session_start();
-                        $connection=mysql_connect("localhost","virtualcoaching","");
+                        $connection=mysql_connect("localhost","root","");
                         mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
                         $email=$_SESSION['login_user'];
                         $query="SELECT Name,Surname FROM user WHERE Email='$email'"; 
@@ -112,7 +112,7 @@ if(!isset($_SESSION['login_user']))
 						<h3>
                           <?php 
                            session_start();
-                          	$connection=mysql_connect("localhost","virtualcoaching","");
+                          	$connection=mysql_connect("localhost","root","");
                             mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Name,Surname FROM user WHERE Email='$email'"; 
@@ -126,7 +126,7 @@ if(!isset($_SESSION['login_user']))
                         
 						<h5>Nome: <input type="text" name="nome" value="<?php 
                            session_start();
-                          	$connection=mysql_connect("localhost","virtualcoaching","");
+                          	$connection=mysql_connect("localhost","root","");
                             mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Name FROM user WHERE Email='$email'"; 
@@ -139,7 +139,7 @@ if(!isset($_SESSION['login_user']))
                         
                         <h5>Cognome: <input type="text" name="cognome" value="<?php 
                            session_start();
-                          	$connection=mysql_connect("localhost","virtualcoaching","");
+                          	$connection=mysql_connect("localhost","root","");
                             mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Surname FROM user WHERE Email='$email'"; 
@@ -155,7 +155,7 @@ if(!isset($_SESSION['login_user']))
                         
 						<h5>Password: <input type="password" name="password" value="<?php 
                            session_start();
-                          	$connection=mysql_connect("localhost","virtualcoaching","");
+                          	$connection=mysql_connect("localhost","root","");
                             mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Password FROM user WHERE Email='$email'"; 
@@ -169,7 +169,7 @@ if(!isset($_SESSION['login_user']))
                         
                         <!--
                         <?php
-                          $connection = mysql_connect("localhost", "virtualcoaching", "");
+                          $connection = mysql_connect("localhost", "root", "");
                           mysql_select_db("my_virtualcoaching",$connection);
                           $email=$_SESSION['login_user'];  
                           $sql=mysql_query("SELECT * FROM user WHERE Email='$email'");
@@ -196,15 +196,6 @@ if(!isset($_SESSION['login_user']))
 
     </section>
 	<!-- /Section: intro -->
-
-	
-                
-
-
-		
-				
-
-
 
     
 </body>
