@@ -4,7 +4,7 @@ session_start();
 	$eta=$_GET["eta"];
 	
 	//stabilisco connessione col server
-    $connection = mysql_connect("localhost", "virtualcoaching", "");
+    $connection = mysql_connect("localhost", "root", "");
 	mysql_select_db("my_virtualcoaching",$connection);
     
 	//calcio a 5
