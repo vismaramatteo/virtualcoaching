@@ -33,8 +33,8 @@ if(!isset($_SESSION['login_user']))
     <meta name="description" content="">
     <meta name="author" content="">
 	
- 	<link rel="import" href="header.html">   
-	<link href="css/aggiornadati.css" rel="stylesheet">
+ 	<link rel="import" href="/virtualcoaching/header.html">   
+	<link href="/virtualcoaching/css/aggiornadati.css" rel="stylesheet">
 
     <title>VIRTUAL COACHING</title>
 
@@ -56,7 +56,7 @@ if(!isset($_SESSION['login_user']))
                 </button>
                 <a class="navbar-brand" href="index.php">
 					<div class="logo">
-						<img height="35" width="280" src="img/LOGO.png"> 
+						<img height="35" width="280" src="/virtualcoaching/img/LOGO.png"> 
 					</div>
                 </a>
             </div>
@@ -64,22 +64,21 @@ if(!isset($_SESSION['login_user']))
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
       <ul class="nav navbar-nav" style="background-color:white">
-        <li class="active"><a href="index.php">Home</a></li>
-        <li id="ultimo"><a href="organizzapartite.php">Organizza partita</a></li>
+        <li class="active"><a href="/virtualcoaching/index.php">Home</a></li>
+        <li id="ultimo"><a href="/virtualcoaching/organizzapartite.php">Organizza partita</a></li>
 
         <li >
 			<a>
         			<?php 
                         if($_SESSION['login_user'])
-                        session_start();
-                        $connection=mysql_connect("localhost","root","");
-                        mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                        $connection=mysqli_connect("localhost","root","");
+                        mysqli_select_db($connection,"my_virtualcoaching") or die ("Error");
                         $email=$_SESSION['login_user'];
                         $query="SELECT Name,Surname FROM user WHERE Email='$email'"; 
-                        $result=mysql_query($query);
-                        $r=mysql_fetch_array($result);
+                        $result=mysqli_query($connection,$query);
+                        $r=mysqli_fetch_array($result);
                         echo ''.$r['Name'].' '.$r['Surname'];
-                        mysql_close($connection);
+                        mysqli_close($connection);
                                  
                     ?>
            </a> 
@@ -98,10 +97,10 @@ if(!isset($_SESSION['login_user']))
     <section id="intro" class="intro">
 		<div class="main container-fluid well">
         
-            <form action="../php/modificadati.php" method="POST">
+            <form action="/virtualcoaching/php/modificadati.php" method="POST">
 				<div class="row-fluid">
 					<div class="col-lg-3" style="padding-top:35px" >
-						<img src="img/utente.png" 
+						<img src="/virtualcoaching/img/utente.png" 
 							class="img-circle img-responsive">
 					</div>
 
@@ -111,69 +110,69 @@ if(!isset($_SESSION['login_user']))
                         
 						<h3>
                           <?php 
-                           session_start();
-                          	$connection=mysql_connect("localhost","root","");
-                            mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                           
+                          	$connection=mysqli_connect("localhost","root","");
+                            mysqli_select_db($connection, "my_virtualcoaching") or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Name,Surname FROM user WHERE Email='$email'"; 
-                            $result=mysql_query($query);
-                            $r=mysql_fetch_array($result);
+                            $result=mysqli_query($connection,$query);
+                            $r=mysqli_fetch_array($result);
                             echo ''.$r['Name'].' '.$r['Surname'];
                            
-                            mysql_close($connection);
+                            mysqli_close($connection);
                           ?>
                         </h3>
                         
 						<h5>Nome: <input type="text" name="nome" value="<?php 
-                           session_start();
-                          	$connection=mysql_connect("localhost","root","");
-                            mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                          
+                          	$connection=mysqli_connect("localhost","root","");
+                            mysqli_select_db($connection,"my_virtualcoaching") or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Name FROM user WHERE Email='$email'"; 
-                            $result=mysql_query($query);
-                            $r=mysql_fetch_array($result);
+                            $result=mysqli_query($connection,$query);
+                            $r=mysqli_fetch_array($result);
                             echo ''.$r['Name'];
                            
-                            mysql_close($connection);
+                            mysqli_close($connection);
                           ?>"/></h5>                       
                         
                         <h5>Cognome: <input type="text" name="cognome" value="<?php 
-                           session_start();
-                          	$connection=mysql_connect("localhost","root","");
-                            mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                           
+                          	$connection=mysqli_connect("localhost","root","");
+                            mysqli_select_db($connection,"my_virtualcoaching") or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Surname FROM user WHERE Email='$email'"; 
-                            $result=mysql_query($query);
-                            $r=mysql_fetch_array($result);
+                            $result=mysqli_query($connection,$query);
+                            $r=mysqli_fetch_array($result);
                             echo ''.$r['Surname'];
                            
-                            mysql_close($connection);
+                            mysqli_close($connection);
                           ?>"/></h5> 
                         
 						<h5>E-mail: <input type="text" name="email" value="<?php $email=$_SESSION['login_user']; echo $email;   ?>"/></h5>
                        
                         
 						<h5>Password: <input type="password" name="password" value="<?php 
-                           session_start();
-                          	$connection=mysql_connect("localhost","root","");
-                            mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+                           
+                          	$connection=mysqli_connect("localhost","root","");
+                            mysqli_select_db($connection,"my_virtualcoaching") or die ("Error");
                             $email=$_SESSION['login_user']; 
                             $query="SELECT Password FROM user WHERE Email='$email'"; 
-                            $result=mysql_query($query);
-                            $r=mysql_fetch_array($result);
+                            $result=mysqli_query($connection,$query);
+                            $r=mysqli_fetch_array($result);
                             echo ''.$r['Password'];
                            
-                            mysql_close($connection);
+                            mysqli_close($connection);
                           ?>"/>
                         </h5>
                         
                         <!--
                         <?php
-                          $connection = mysql_connect("localhost", "root", "");
-                          mysql_select_db("my_virtualcoaching",$connection);
+                          $connection = mysqli_connect("localhost", "root", "");
+                          mysqli_select_db($connection,"my_virtualcoaching");
                           $email=$_SESSION['login_user'];  
-                          $sql=mysql_query("SELECT * FROM user WHERE Email='$email'");
-                          $result=mysql_fetch_assoc($sql);   //php per far vedere il blob
+                          $sql=mysqli_query($connection,"SELECT * FROM user WHERE Email='$email'");
+                          $result=mysqli_fetch_assoc($sql);   //php per far vedere il blob
                           echo '<div style="margin-left:-85px;margin-bottom:5%;"><img class="imgProfilo" src="data:image/jpeg;base64,'.base64_encode( $result['avatar'] ).'" width="30"/></div>';
                         ?> 
                         -->
@@ -196,6 +195,15 @@ if(!isset($_SESSION['login_user']))
 
     </section>
 	<!-- /Section: intro -->
+
+	
+                
+
+
+		
+				
+
+
 
     
 </body>
