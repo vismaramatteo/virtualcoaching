@@ -2,7 +2,7 @@
     padding: 20px 0;
     min-height: 250px;
 	width:700px;
-	height:300px;
+	height:400px;
 	display: inline-block;
     vertical-align: middle;
     float: none;
@@ -12,7 +12,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -150px;
+    margin-top: -180px;
     margin-left: -400px;
 }
 .main .btn {
@@ -26,6 +26,19 @@
     background: #2a6496;
     color: #ffffff;
 }
+
+#btn1 {
+    border:0;
+    border-radius: 0;
+    background: #ce0606;
+    color: #ffffff;
+}
+#btn1:hover,
+#btn1:focus {
+    background: #9f0000;
+    color: white;
+}
+
 .main .dropdown-menu  {
     background-color: #428bca;
     border:0;
