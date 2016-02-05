@@ -10,7 +10,7 @@ else
 $username=$_POST['email'];
 $password=$_POST['password'];
 // Stabilizzo la connessione col server passandogli come parametri il nome del server, l'id e la password
-$connection = mysql_connect("localhost", "virtualcoaching", "");
+$connection = mysql_connect("localhost", "root", "");
 mysql_select_db("my_virtualcoaching",$connection);
 // Tolgo i possibili / all'interno di username e password
 $username = stripslashes($username);
