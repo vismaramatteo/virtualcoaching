@@ -69,7 +69,24 @@ if(!isset($_SESSION['login_user']))
     <script src="js/cookies.js"></script>
    	<script src="js/stepbar.js" type="text/javascript"></script>			
 
-
+		<script>
+			var IDCateg=-1;
+			function funzione(val) 
+			{
+				$.get("php/categoriecalcio.php",{"a":val},function(data){
+					IDCateg=data;
+					alert(data);
+				});
+			};
+			
+		function funzione2(val1,val2,val3) 
+			{
+				$.get("php/slider.php",{"a":val1,"b":val2,"c":val3,"d":IDCateg},function(data){
+					alert(data);
+				});
+			}
+		</script>
+	
 </head>
 
 
@@ -195,9 +212,8 @@ if(!isset($_SESSION['login_user']))
 						<div>
                           <div class="col-md-12 well text-center">
                               <h1>Categoria</h1>
-                                  <form method="GET" action="../php/categoriecalcio.php">
                                       <center>						
-                                          <select name="eta" style="height:30px; width:250px">
+                                          <select id="eta" name="eta" style="height:30px; width:250px">
                                               <option value="pulcini">U 11 - PULCINI</option>
                                               <option value="esordienti">U 13 - ESORDIENTI</option>
                                               <option value="giovanissimi">U 15 - GIOVANISSIMI</option>
@@ -206,8 +222,8 @@ if(!isset($_SESSION['login_user']))
                                           </select>
                                           <br>	
                                       </center>
-                                      <button class="btn-cat" onclick="javascript: resetActive(event, 66, 'step-2')" style="float:right">Avanti</button>
-                                  </form>
+                                      <button class="btn-cat" onclick="javascript: resetActive(event, 66, 'step-2'); funzione($('#eta').val());" style="float:right">Avanti</button>
+                                
                           </div>
 						</div>
 					</div>
@@ -218,25 +234,24 @@ if(!isset($_SESSION['login_user']))
 						<div class="col-md-12 well text-center">
 							<h1>Ruolo</h1>
 							
-								<form class="form-horizontal form-pricing" role="form">
 									<div class="price-slider">
 										<h4 class="great">Attacco</h4>
 										<div class="col-sm-12">
-											<div id="slider"></div>
+											<div id="slider" name="slider"></div>
 										</div>
 									</div>
 												
 									<div class="price-slider">
 										<h4 class="great">Difesa</h4>
 										<div class="col-sm-12">
-											<div id="slider2"></div>
+											<div id="slider2" name="slider2"></div>
 										</div>
 									</div>
 												
 									<div class="price-slider">
 										<h4 class="great">Fondamentali</h4>
 										<div class="col-sm-12">
-											<div id="slider3"></div>
+											<div id="slider3" name="slider3"></div>
 										</div>
 									</div>
 
@@ -245,7 +260,7 @@ if(!isset($_SESSION['login_user']))
 											<label for="amount" class="col-sm-6 control-label">Attacco: </label>
 											<span class="help-text">Scegli la percentuale →</span>
 											<div class="col-sm-6">
-												<input type="hidden" id="amount" class="form-control">
+												<input type="hidden" id="amount" name="amount" class="form-control">
 												<p class="price lead" id="amount-label"></p>
 												<span class="price">%</span>
 											</div>
@@ -255,7 +270,7 @@ if(!isset($_SESSION['login_user']))
 											<label for="duration" class="col-sm-6 control-label">Difesa: </label>
 											<span class="help-text">Scegli la percentuale →</span>
 											<div class="col-sm-6">
-												<input type="hidden" id="duration" class="form-control">
+												<input type="hidden" id="duration" name="duration" class="form-control">
 												<p class="price lead" id="duration-label"></p>
 												<span class="price">%</span>
 											</div>
@@ -265,16 +280,17 @@ if(!isset($_SESSION['login_user']))
 											<label for="fondamentali" class="col-sm-6 control-label">Fondamentali: </label>
 											<span class="help-text">Scegli la percentuale →</span>
 											<div class="col-sm-6">
-												<input type="hidden" id="fondamentali" class="form-control">
+												<input type="hidden" id="fondamentali" name="fondamentali" class="form-control">
 												<p class="price lead" id="fondamentali-label"></p>
 												<span class="price">%</span>
 											</div>
 										</div>
 									</div>
-								</form>
+								
 		  
-							<button class="btn-cat" onclick="javascript: resetActive(event, 100, 'step-3')" style="float:right">Avanti</button>
+							<button class="btn-cat" onclick="javascript: resetActive(event, 100, 'step-3'); funzione2($('#amount').val(),$('#duration').val(),$('#fondamentali').val())" style="float:right">Avanti</button>   
 							<button class="btn-cat" onclick="javascript: resetActive(event, 33, 'step-1')" style="float:left">Indietro</button>
+							
 						</div>
 					</div>
 				</div>
