@@ -14,12 +14,10 @@ $connection = mysql_connect("localhost", "root", "");
 mysql_select_db("my_virtualcoaching",$connection);
 // Tolgo i possibili / all'interno di username e password
 $username = stripslashes($username);
-$password = stripslashes($password);
 $username = mysql_real_escape_string($username);
-$password = mysql_real_escape_string($password);
 // Seleziono il database
 // Query SQL che permette di controllare email e password con quelle all'interno del database
-$query = mysql_query("select * from user where password='$password' AND email='$username'");
+$query = mysql_query("select * from user where password='".md5($password)."' AND email='$username'");
 $rows = mysql_num_rows($query);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Inizializzo la sessione
