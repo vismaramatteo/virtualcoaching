@@ -10,23 +10,23 @@ $sport=$_POST['sport'];
 $md5pass=md5($password);
 //STABILIRE CONNESSIONE CON IL SERVER
 
-$connection=mysql_connect("localhost","root", "");
-mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
+$connection=mysqli_connect("localhost","root", "");
+mysqli_select_db($connection,"my_virtualcoaching") or die ("Error");
 
 //PROTEZIONE DATI
 $query="SELECT Password FROM `user`";
-$result=mysql_query($query);
+$result=mysqli_query($query);
 
 if($sport=="calcio")
 {
 	$query="INSERT INTO `user` (`Name`,`Surname`,`telefono`,`Email`,`Password`,`Sportscelto`) VALUES ('$nome','$cognome','$telefono','$email','$md5pass','$sport')";
-	$result=mysql_query($query);
+	$result=mysqli_query($connection,$query);
 }
 
 if($sport=="basket")
 {
 	$query="INSERT INTO `user` (`Name`,`Surname`,`telefono`,`Email`,`Password`,`Sportscelto`) VALUES ('$nome','$cognome','$telefono','$email','$md5pass','$sport')";
-	$result=mysql_query($query);
+	$result=mysqli_query($connection,$query);
 }
 
 
@@ -51,6 +51,6 @@ else{
 }
 
 header("location: ../index.php");
-mysql_close($connection);
+mysqli_close($connection);
 
 ?>
