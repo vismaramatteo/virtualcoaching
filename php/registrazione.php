@@ -7,24 +7,25 @@ $telefono=$_POST['phone'];
 $email=$_POST['email'];
 $password=$_POST['password'];
 $sport=$_POST['sport'];
-
+$md5pass=md5($password);
 //STABILIRE CONNESSIONE CON IL SERVER
 
 $connection=mysql_connect("localhost","root", "");
 mysql_select_db("my_virtualcoaching",$connection) or die ("Error");
 
 //PROTEZIONE DATI
-
+$query="SELECT Password FROM `user`";
+$result=mysql_query($query);
 
 if($sport=="calcio")
 {
-	$query="INSERT INTO `user` (`Name`,`Surname`,`telefono`,`Email`,`Password`,`Sportscelto`) VALUES ('$nome','$cognome','$telefono','$email','$password','$sport')";
+	$query="INSERT INTO `user` (`Name`,`Surname`,`telefono`,`Email`,`Password`,`Sportscelto`) VALUES ('$nome','$cognome','$telefono','$email','$md5pass','$sport')";
 	$result=mysql_query($query);
 }
 
 if($sport=="basket")
 {
-	$query="INSERT INTO `user` (`Name`,`Surname`,`telefono`,`Email`,`Password`,`Sportscelto`) VALUES ('$nome','$cognome','$telefono','$email','$password','$sport')";
+	$query="INSERT INTO `user` (`Name`,`Surname`,`telefono`,`Email`,`Password`,`Sportscelto`) VALUES ('$nome','$cognome','$telefono','$email','$md5pass','$sport')";
 	$result=mysql_query($query);
 }
 
