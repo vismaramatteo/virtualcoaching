@@ -68,6 +68,7 @@ if(!isset($_SESSION['login_user']))
     <script src="js/custom.js"></script>
     <script src="js/cookies.js"></script>
    	<script src="js/stepbar.js" type="text/javascript"></script>			
+	<script src="js/jsonfn.js"></script>
 
 		<script>
 			var IDCateg=-1;
@@ -82,7 +83,57 @@ if(!isset($_SESSION['login_user']))
 		function funzione2(val1,val2,val3) 
 			{
 				$.get("php/slider.php",{"a":val1,"b":val2,"c":val3,"d":IDCateg},function(data){
-					alert(data);
+					
+					
+					var arr=JSONfn.parse(data);
+										
+					for(var k in arr)
+					{						
+						var v3=document.createElement('TR');
+						var v4=document.createElement('th');
+						$(v4).append("<center>"+arr[k]["Nome"]+"</center>");
+						$(v3).append(v4);
+						
+						var v41=document.createElement('th');
+						$(v41).append("<center>"+val1+"</center>");
+						$(v3).append(v41);
+						
+						var v42=document.createElement('th');
+						$(v42).append("<center>"+val2+"</center>");
+						$(v3).append(v42);
+						
+						var v43=document.createElement('th');
+						$(v43).append("<center>"+val3+"</center>");
+						$(v3).append(v43);
+						
+						var v44=document.createElement('th');
+						$(v44).append("<center>"+arr[k]["Descrizione"]+"</center>");
+						$(v3).append(v44);	
+						
+						var v45=document.createElement('th');
+						$(v45).append("<center><button class=\"btn btn-info\"><a href=\""+arr[k]["URL"]+"\">APRI</a></button></center>");
+						$(v3).append(v45);	
+
+						
+						$("#TabellaInclusione thead").append(v3);
+								
+						
+					}
+					/*
+						alert(arr[k]["IDEsercizio"]);
+						alert(arr[k]["Nome"]);
+						alert(arr[k]["IDSportCategoria"]);
+						alert(arr[k]["Percentuale"]);
+						alert(arr[k]["Descrizione"]);
+						alert(arr[k]["URL"]);
+						*/
+					
+					
+
+
+					
+
+																
 				});
 			}
 		</script>
@@ -113,18 +164,19 @@ if(!isset($_SESSION['login_user']))
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
     <ul class="nav navbar-nav" style="background-color:white">
-        <li class="active"><a href="/index.php">Home</a></li>
-          <li id="ultimo"><a href="/basket.php">Basket</a></li>
+        <li class="active"><a href="/virtualcoaching/index.php">Home</a></li>
+          <li id="ultimo"><a href="/virtualcoaching/basket.php">Basket</a></li>
 			<li class="dropdown">
 				<?php 
-                              if(!isset($_SESSION['login_user']))
-                    echo '
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-                     <ul class="dropdown-menu" style="padding: 15px;min-width: 242px;">
+                    if(!isset($_SESSION['login_user']))
+                    echo ' <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                   
+                    <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
                         <li>
                            <div class="row">
                               <div class="col-md-12">
-                                 <form class="form"  method="POST" action="./php/logincalcio.php" accept-charset="UTF-8" id="login-nav">
+                              
+                                 <form class="form"  method="POST" action="/virtualcoaching/php/login.php" accept-charset="UTF-8" id="login-nav">
                                     <div class="form-group">
                                        <label class="sr-only" for="email">E-Mail</label>
                                        <input type="email" name="email" class="form-control" id="email" placeholder="Indirizzo E-Mail" required>
@@ -133,45 +185,49 @@ if(!isset($_SESSION['login_user']))
                                        <label class="sr-only" for="password">Password</label>
                                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
                                     </div>
-                                    <div class="checkbox">
-                                       <label>
-                                       <input type="checkbox"> Ricordami
-                                       </label>
-                                    </div>
+                                    
+									<a  href="index.php"
+									style="color: #000000; background-color:#fff">
+                                    PASSWORD DIMENTICATA? </a>
+									<br><br>
+									
                                     <div class="form-group">
                                        <button type="submit" class="btn btn-success btn-block">Accedi</button>
-									   <button type="register" class="btn btn-primary btn-block">Registrati</button>
                                     </div>
+                                    	
                                  </form> 
-                               </div> 
-                           </div> ';
-                           
-                                  else
+                                 <button href="#" onclick="$(&#39#example-popup&#39).show()" data-popup-target="#example-popup" class="btn btn-primary btn-block">Registrati</button>
+                                 </div>
+                              
+                           </div>
+                            </li>	
+	  						</ul>';
+                                 else
                                  	echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$_SESSION['login_user'].'<b class="caret"></b></a>
-                                    <ul class="dropdown-menu" style="padding: 15px;min-width: 333px;">
-										<li>
-											<form>
-												<div class="row">
-													<div class="col-md-12">
-														<div style="margin: 0 auto;">
-															<center>
-																<img class="fotorotonda" src="img/utente.png"> &nbsp;&nbsp;
-																<strong> Ciao '.$_SESSION['login_user'].' </strong>
-															</center>
-														</div>
-														<br>
-													</div>
-																													
-													<div class="col-md-12">
-														<a style="float:left" id="aggiornadati" href="/php/aggiornadati.php">Aggiorna dati</a>
-														<a style="float:right" id="logout" href="/php/logoutcalcio.php">Logout</a>
-													</div>
-												</div>
-											</form> 
-										</li>	
-									</ul>
-						</li>
-					</ul>';
+                                     <ul class="dropdown-menu" style="padding: 15px;min-width: 340px;">
+                        <li>
+                        	<form>
+								<div class="row">
+									<div class="col-md-12">
+										<div style="margin: 0 auto;">
+											<center>
+												<img class="fotorotonda" src="/virtualcoaching/img/utente.png"> &nbsp;&nbsp;
+												<strong> Ciao '.$_SESSION['login_user'].' </strong>
+											</center>
+										</div>
+										<br>
+									</div>
+																									
+									<div class="col-md-12">
+										<a style="float:left" id="aggiornadati" href="/virtualcoaching/aggiornadati.php">Aggiorna dati</a>
+										<a style="float:right" id="logout" href="/virtualcoaching//php/logout.php">Logout</a>
+									</div>
+								  
+								</div>
+                            </form>
+                        </li>	
+					</ul>
+                   ';
                                  ?>                      
         </li>
 	  </ul>
@@ -255,39 +311,28 @@ if(!isset($_SESSION['login_user']))
 										</div>
 									</div>
 
-									<div class="price-form">
-										<div class="form-group">
-											<label for="amount" class="col-sm-6 control-label">Attacco: </label>
-											<span class="help-text">Scegli la percentuale →</span>
-											<div class="col-sm-6">
+											<label for="amount" class="col-sm-4 ">Attacco: </label>
+											<label for="duration" class="col-sm-4 ">Difesa: </label>
+											<label for="fondamentali" class="col-sm-4 ">Fondamentali: </label>
+											
+											<div class="col-sm-4">
 												<input type="hidden" id="amount" name="amount" class="form-control">
 												<p class="price lead" id="amount-label"></p>
 												<span class="price">%</span>
 											</div>
-										</div>
-											
-										<div class="form-group">
-											<label for="duration" class="col-sm-6 control-label">Difesa: </label>
-											<span class="help-text">Scegli la percentuale →</span>
-											<div class="col-sm-6">
+																					
+											<div class="col-sm-4">
 												<input type="hidden" id="duration" name="duration" class="form-control">
 												<p class="price lead" id="duration-label"></p>
 												<span class="price">%</span>
 											</div>
-										</div>
-											
-										<div class="form-group">
-											<label for="fondamentali" class="col-sm-6 control-label">Fondamentali: </label>
-											<span class="help-text">Scegli la percentuale →</span>
-											<div class="col-sm-6">
+																																										
+											<div class="col-sm-4">
 												<input type="hidden" id="fondamentali" name="fondamentali" class="form-control">
 												<p class="price lead" id="fondamentali-label"></p>
 												<span class="price">%</span>
-											</div>
-										</div>
-									</div>
-								
-		  
+											</div>										
+										  
 							<button class="btn-cat" onclick="javascript: resetActive(event, 100, 'step-3'); funzione2($('#amount').val(),$('#duration').val(),$('#fondamentali').val())" style="float:right">Avanti</button>   
 							<button class="btn-cat" onclick="javascript: resetActive(event, 33, 'step-1')" style="float:left">Indietro</button>
 							
@@ -300,42 +345,22 @@ if(!isset($_SESSION['login_user']))
 						<div class="col-md-12 well text-center">
 							<h1>Risultati</h1>
 							
-							<table class="table table-bordered" style="background-color:white">
+							<div id="ciao">
+							</div>
+							
+							<table class="table table-bordered" id="TabellaInclusione" style="background-color:white">
 								<thead>
 								  <tr>
-									<th><center>#</center></th>
 									<th><center>ESERCIZIO</center></th>
 									<th><center>ATTACCO</center></th>
 									<th><center>DIFESA</center></th>
 									<th><center>FONDAMENTALI</center></th>
+									<th><center>DESCRIZIONE</center></th>
 									<th><center>LINK</center></th>
 								  </tr>
 								</thead>
 								<tbody>
-								  <tr>
-									<td>1</td>
-									<td>Scambio di passaggi</td>
-									<td>20</td>
-									<td>30</td>
-									<td>50</td>
-									<td><a href="pdf/basket/Attacco alla zona/0011 - Attacco alla zona 3-2.pdf " type="button" class="btn btn-info">Apri</a></td>
-								  </tr>
-								  <tr>
-									<td>2</td>
-									<td>Terzo Tempo</td>
-									<td>20</td>
-									<td>30</td>
-									<td>50</td>
-									<td><button type="button" class="btn btn-info">Apri</button></td>
-								  </tr>
-								  <tr>
-									<td>3</td>
-									<td>Intercettazione Passaggi</td>
-									<td>20</td>
-									<td>30</td>
-									<td>50</td>
-									<td><button type="button" class="btn btn-info">Apri</button></td>
-								  </tr>
+
 								</tbody>
 							</table>
 							
