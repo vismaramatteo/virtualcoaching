@@ -33,24 +33,63 @@ if(!isset($_SESSION['login_user']))
 
     <title>VIRTUAL COACHING</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Fonts -->
+    <!-- CSS -->
+	
+	<!--SLIDER-->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/slider.css">
+	
+	<!--FONTS-->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+	
+	<!--ANIMAZIONI-->
 	<link href="css/animate.css" rel="stylesheet" />
-    <!-- Squad theme CSS -->
+
+	<!--STILI PAGINA-->
     <link href="css/styleb.css" rel="stylesheet">
 	<link href="css/defaultb.css" rel="stylesheet">
 	<link href="css/stepbar.css" rel="stylesheet">	
-	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
 	<link href="css/login.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="css/slider.css">
 
+    <!-- JAVASCRIPT -->
+	
+	<!--SLIDER-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	
+    <script src="js/jquery.easing.min.js"></script>	
+	<script src="js/jquery.scrollTo.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/login.js"></script>
+    <script src="js/funzionamentoslider.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/cookies.js"></script>
+   	<script src="js/stepbar.js" type="text/javascript"></script>	
+
+	<script>
+			var IDCateg=-1;
+			function funzione(val) 
+			{
+				$.get("php/categorie.php",{"a":val},function(data){
+					IDCateg=data;
+					alert(data);
+				});
+			};
+			
+		function funzione2(val1,val2,val3) 
+			{
+				$.get("php/slider.php",{"a":val1,"b":val2,"c":val3,"d":IDCateg},function(data){
+					alert(data);
+				});
+			}
+		</script>
+		
 </head>
 
-<script type="text/javascript" src="https://nibirumail.com/docs/scripts/nibirumail.cookie.min.js"></script>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 	<!-- Preloader -->
@@ -74,65 +113,70 @@ if(!isset($_SESSION['login_user']))
             <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
         <ul class="nav navbar-nav" style="background-color:white">
-          <li class="active"><a href="/index.php">Home</a></li>
-          <li id="ultimo"><a href="/calcio.php">Calcio</a></li>
+          <li class="active"><a href="/virtualcoaching/index.php">Home</a></li>
+          <li id="ultimo"><a href="/virtualcoaching/calcio.php">Calcio</a></li>
             <li class="dropdown">
             <?php 
-                    if(!isset($_SESSION['login_user']))
-                    echo '
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-                     <ul class="dropdown-menu" style="padding: 15px;min-width: 241px;">
+                   if(!isset($_SESSION['login_user']))
+                    echo ' <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                   
+                    <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
                         <li>
-							   <div class="row">
-								  <div class="col-md-12">
-								  
-									 <form class="form"  method="POST" action="./php/loginbasket.php" accept-charset="UTF-8" id="login-nav">
-										<div class="form-group">
-										   <label class="sr-only" for="email">E-Mail</label>
-										   <input type="email" name="email" class="form-control" id="email" placeholder="Indirizzo E-Mail" required>
-										</div>
-										<div class="form-group">
-										   <label class="sr-only" for="password">Password</label>
-										   <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-										</div>
-										<div class="checkbox">
-										   <label>
-										   <input type="checkbox"> Ricordami
-										   </label>
-										</div>
-										<div class="form-group">
-										   <button type="submit" class="btn btn-success btn-block">Accedi</button>
-										   <button type="register" class="btn btn-primary btn-block">Registrati</button>
-										</div>
-									 </form> </div> 
-							   </div>   ';
-                                else
+                           <div class="row">
+                              <div class="col-md-12">
+                              
+                                 <form class="form"  method="POST" action="/virtualcoaching/php/login.php" accept-charset="UTF-8" id="login-nav">
+                                    <div class="form-group">
+                                       <label class="sr-only" for="email">E-Mail</label>
+                                       <input type="email" name="email" class="form-control" id="email" placeholder="Indirizzo E-Mail" required>
+                                    </div>
+                                    <div class="form-group">
+                                       <label class="sr-only" for="password">Password</label>
+                                       <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                                    </div>
+                                    
+									<a  href="index.php"
+									style="color: #000000; background-color:#fff">
+                                    PASSWORD DIMENTICATA? </a>
+									<br><br>
+									
+                                    <div class="form-group">
+                                       <button type="submit" class="btn btn-success btn-block">Accedi</button>
+                                    </div>
+                                    	
+                                 </form> 
+                                 <button href="#" onclick="$(&#39#example-popup&#39).show()" data-popup-target="#example-popup" class="btn btn-primary btn-block">Registrati</button>
+                                 </div>
+                              
+                           </div>
+                            </li>	
+	  						</ul>';
+                                 else
                                  	echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$_SESSION['login_user'].'<b class="caret"></b></a>
-                                    <ul class="dropdown-menu" style="padding: 15px;min-width: 331px;">
-										<li>
-											<form> 
-												<div class="row">
-													<div class="col-md-12">
-														<div style="margin: 0 auto;">
-															<center>
-																<img class="fotorotonda" src="img/utente.png"> &nbsp;&nbsp;
-																<strong> Ciao '.$_SESSION['login_user'].' </strong>
-															</center>
-														</div>
-														<br>
-													</div>
-																													
-													<div class="col-md-12">
-														<a style="float:left" id="aggiornadati" href="/php/aggiornadati.php">Aggiorna dati</a>
-														<a style="float:right" id="logout" href="/php/logoutbasket.php">Logout</a>
-													</div> 
-												</div>
-											</form> 
-										</li>	
-									</ul>
-						</li>
-					</ul>';
-					
+                                     <ul class="dropdown-menu" style="padding: 15px;min-width: 340px;">
+                        <li>
+                        	<form>
+								<div class="row">
+									<div class="col-md-12">
+										<div style="margin: 0 auto;">
+											<center>
+												<img class="fotorotonda" src="/virtualcoaching/img/utente.png"> &nbsp;&nbsp;
+												<strong> Ciao '.$_SESSION['login_user'].' </strong>
+											</center>
+										</div>
+										<br>
+									</div>
+																									
+									<div class="col-md-12">
+										<a style="float:left" id="aggiornadati" href="/virtualcoaching/aggiornadati.php">Aggiorna dati</a>
+										<a style="float:right" id="logout" href="/virtualcoaching//php/logout.php">Logout</a>
+									</div>
+								  
+								</div>
+                            </form>
+                        </li>	
+					</ul>
+                   ';
 				?>
 		</li>
         </ul>
@@ -202,19 +246,102 @@ if(!isset($_SESSION['login_user']))
 					<div class="col-xs-12">
 						<div class="col-md-12 well text-center">
 							<h1>Ruolo</h1>
-
 							
-							<button class="btn-cat" onclick="javascript: resetActive(event, 100, 'step-3')" style="float:right" >Avanti</button>
+									<div class="price-slider">
+										<h4 class="great">Attacco</h4>
+										<div class="col-sm-12">
+											<div id="slider" name="slider"></div>
+										</div>
+									</div>
+												
+									<div class="price-slider">
+										<h4 class="great">Difesa</h4>
+										<div class="col-sm-12">
+											<div id="slider2" name="slider2"></div>
+										</div>
+									</div>
+												
+									<div class="price-slider">
+										<h4 class="great">Fondamentali</h4>
+										<div class="col-sm-12">
+											<div id="slider3" name="slider3"></div>
+										</div>
+									</div>
+
+											<label for="amount" class="col-sm-4 ">Attacco: </label>
+											<label for="duration" class="col-sm-4 ">Difesa: </label>
+											<label for="fondamentali" class="col-sm-4 ">Fondamentali: </label>
+											
+											<div class="col-sm-4">
+												<input type="hidden" id="amount" name="amount" class="form-control">
+												<p class="price lead" id="amount-label"></p>
+												<span class="price">%</span>
+											</div>
+																					
+											<div class="col-sm-4">
+												<input type="hidden" id="duration" name="duration" class="form-control">
+												<p class="price lead" id="duration-label"></p>
+												<span class="price">%</span>
+											</div>
+																																										
+											<div class="col-sm-4">
+												<input type="hidden" id="fondamentali" name="fondamentali" class="form-control">
+												<p class="price lead" id="fondamentali-label"></p>
+												<span class="price">%</span>
+											</div>										
+										  
+							<button class="btn-cat" onclick="javascript: resetActive(event, 100, 'step-3'); funzione2($('#amount').val(),$('#duration').val(),$('#fondamentali').val())" style="float:right">Avanti</button>   
 							<button class="btn-cat" onclick="javascript: resetActive(event, 33, 'step-1')" style="float:left">Indietro</button>
+							
 						</div>
 					</div>
 				</div>
 					
-				<div class="row setup-content step hiddenStepInfo" id="step-3">
+<div class="row setup-content step hiddenStepInfo" id="step-3">
 					<div class="col-xs-12">
 						<div class="col-md-12 well text-center">
 							<h1>Risultati</h1>
-							<button class="btn-cat" onclick="javascript: resetActive(event, 33, 'step-1')" style="float:right" >Nuova Ricerca</button>
+							
+							<table class="table table-bordered" style="background-color:white">
+								<thead>
+								  <tr>
+									<th><center>#</center></th>
+									<th><center>ESERCIZIO</center></th>
+									<th><center>ATTACCO</center></th>
+									<th><center>DIFESA</center></th>
+									<th><center>FONDAMENTALI</center></th>
+									<th><center>LINK</center></th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td>1</td>
+									<td>Scambio di passaggi</td>
+									<td>20</td>
+									<td>30</td>
+									<td>50</td>
+									<td><a href="pdf/basket/Attacco alla zona/0011 - Attacco alla zona 3-2.pdf " type="button" class="btn btn-info">Apri</a></td>
+								  </tr>
+								  <tr>
+									<td>2</td>
+									<td>Terzo Tempo</td>
+									<td>20</td>
+									<td>30</td>
+									<td>50</td>
+									<td><button type="button" class="btn btn-info">Apri</button></td>
+								  </tr>
+								  <tr>
+									<td>3</td>
+									<td>Intercettazione Passaggi</td>
+									<td>20</td>
+									<td>30</td>
+									<td>50</td>
+									<td><button type="button" class="btn btn-info">Apri</button></td>
+								  </tr>
+								</tbody>
+							</table>
+							
+							<button class="btn-cat" onclick="javascript: resetActive(event, 33, 'step-1')" style="float:right">Nuova Ricerca</button>
 							<button class="btn-cat" onclick="javascript: resetActive(event, 66, 'step-2')" style="float:left" >Indietro</button>
 						</div>
 					</div>
@@ -228,7 +355,7 @@ if(!isset($_SESSION['login_user']))
 					</div>
 				</div>
 			</div>
-			<script src="js/stepbar.js" type="text/javascript"></script>	
+
 	</div>
 </section>
 	<!-- /Section: sport -->
