@@ -10,24 +10,25 @@ else
 $username=$_POST['email'];
 $password=$_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-$connection = mysql_connect("localhost", "root", "");
-mysql_select_db("my_virtualcoaching",$connection);
+$connection = mysqli_connect("localhost", "root", "");
+mysqli_select_db($connection,"my_virtualcoaching");
 // To protect MySQL injection for Security purpose
 $username = stripslashes($username);
-$password = stripslashes($password);
-$username = mysql_real_escape_string($username);
-$password = mysql_real_escape_string($password);
+$username = $connection->real_escape_string($username);
 // Selecting Database
 // SQL query to fetch information of registerd users and finds user match.
-$query = mysql_query("select * from user where password='$password' AND email='$username'");
-$rows = mysql_num_rows($query);
+$query = $connection->query("select * from user where password='".md5($password)."' AND email='$username'");
+$rows = $query->num_rows;
+echo md5($password);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Initializing Session
 header("location: ../calcio.php");
+
 } else {
 $error = "Username or Password is invalid";
+echo $error;
 }
-mysql_close($connection); // Closing Connection
+mysqli_close($connection); // Closing Connection
 }
 
 ?>
