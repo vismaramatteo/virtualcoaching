@@ -15,14 +15,14 @@ mysqli_select_db($connection,"my_virtualcoaching") or die ("Error");
 // To protect MySQL injection for Security purpose
 $username = stripslashes($username);
 $password = stripslashes($password);
-$username = mysql_real_escape_string($username);
-$password = mysql_real_escape_string($password);
+$username = mysqli_real_escape_string($username);
+$password = mysqli_real_escape_string($password);
 // Selecting Database
 // SQL query to fetch information of registerd users and finds user match.
 
 $query = "select * from user where password='$password' AND email='$username'");
 $result=mysqli_query($query);
-$rows = mysql_num_rows($query);
+$rows = mysqli_num_rows($query);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Initializing Session
 header("location: ../basket.php");
